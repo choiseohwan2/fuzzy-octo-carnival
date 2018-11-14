@@ -14,7 +14,7 @@
 <table>
    <thead>
       <tr>
-         <th>알바생코드</th>
+         <th>알바생코드 </th>
          <th>이름</th>
          <th>주소</th>
          <th>연락처</th>
