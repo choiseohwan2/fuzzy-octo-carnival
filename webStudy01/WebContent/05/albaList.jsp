@@ -25,7 +25,7 @@
       
       <% //맵에 사이즈만큼 ENTRY KEY꺼내오기
       
-      Map<String,AlbasengVO> parameterMap = SimpleFormProcessServlet.albasengs;
+      Map<String,AlbasengVO> alba = SimpleFormProcessServlet.albasengs;
       
       for (Entry<String, AlbasengVO> entry : parameterMap.entrySet()) {
       %>
