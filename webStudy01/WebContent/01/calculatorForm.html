@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script type="text/javascript">
+$(function(){
+	var resultArea = $("#result");
+	$("#calForm").on("submit", function(event){
+		event.preventDefault();
+		var url = $(this).attr("action"); 
+		var method = $(this).attr("method");
+		var data = $(this).serialize();
+// 		alert(data);
+		$.ajax({
+			url: url, //주소
+			method: method, //메서드
+			data: data, //파라미터
+			dataType: "json", //request header : accept 결정
+			//html(text/html), json(application/json), text(text/plain), xml(application/xml) 넷의 공통점 : 문자열
+			success:function(resp){  //성공했을때
+				resultArea.html(resp.result);
+			},
+			error: function(resp){ //에러메세지 
+// 				alert(resp.responseTxt);
+			}
+		});
+		return false;
+	});
+});
+		
+
+</script>
+</head>
+<body>
+<!-- 사칙 연산을 위해 좌항피연산자, 연산자, 우항피연산자 입력. -->
+<form id="calForm" action="/webStudy01/calculate" method="post">
+좌항피연산자 : <input type ="number" name="leftOp"/>
+연산자
+<input type="radio" name="operator" value="add"/>+
+<input type="radio" name="operator" value="minus"/>-
+<input type="radio" name="operator" value="multiply"/>*
+<input type="radio" name="operator" value="divide"/>/
+우항피연산자 : <input type ="number" name="rightOp"/>
+<input type="submit" value="="/>
+</form>
+<div id="result">
+
+</div>
+</body>
+</html>

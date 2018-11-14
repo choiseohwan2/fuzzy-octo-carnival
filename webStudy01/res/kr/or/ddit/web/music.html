@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+   <head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <script type="text/javascript">
+      $(function() {
+         var imgArea=$("#musicArea");
+//           var pattern='<img src="music?kk=%v"/>';
+         $("[name='kk']").on("change", function() {
+            $("[name='kk']").submit();
+            var filename= $(this).val();
+            imgArea.html(filename);
+//             //최범균 메모 
+         });
+         
+      });            
+   </script>
+   
+      <style type="text/css">
+         table{
+            border:1px solid black;
+            background-color:yellow;
+         }
+      </style>
+   </head>
+   <body>
+   <form action='music' method='post' name="music">
+   <select name='kk'  >
+         @img
+      
+      </select>
+      <input type='submit' value='전송'>
+      </form>
+      
+      <div id="musicArea">
+      
+      </div>
+      <script type="text/javascript">
+         
+//       function changeHandler(event) {
+//          var imgArea=document.getElementById("imgArea");
+// //          document.imgForm.submit();
+// //          var imgArea=$.("imgArea").innerHtml;
+//          alert(event.target.value);
+//          var pattern='<img src="img?kk="%v"/>';
+//          var name=pattern.replace("%v",event.target.value);
+//          imgArea.innerHTML=pattern.replace("%v",name);
+// //          document.getElementById("imgArea").innerHtml()=
+         
+//       }
+      </script>  
+      
+      
+   </body>
+</html>

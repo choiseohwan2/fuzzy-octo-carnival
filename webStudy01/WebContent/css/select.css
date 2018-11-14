@@ -1,0 +1,28 @@
+select {
+    width: 200px;
+    height: 30px;
+    padding-left: 10px;
+    font-size: 18px;
+    color: #000000;
+    border: 3px solid #f572aa;
+    border-radius: 3px;
+    -webkit-appearance: none; 
+   -moz-appearance: none;    
+   appearance: none;
+   background: url('select-arrow.png') no-repeat 95% 50%; /* 화살표 아이콘 추가 */       
+}
+select::-ms-expand {
+   display: none;            
+}
+/* check, hover 스타일 설정 IE, Chrome */
+select option:checked, 
+select option:hover {    
+    background: #03f8fe; 
+    color: #fff;
+}
+/* check, hover 스타일 설정 FireFox */
+ select option:checked,
+select option:hover { 
+    box-shadow: 0 0 10px 100px #ff00ff inset;  
+    color: #fff;
+}
