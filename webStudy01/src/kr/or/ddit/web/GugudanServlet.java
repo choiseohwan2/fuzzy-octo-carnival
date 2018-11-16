@@ -8,7 +8,7 @@ import javax.servlet.annotation.*;
 
 @WebServlet(value="/gugudan.do")
 public class GugudanServlet extends HttpServlet {
-	@Override
+	/*@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String minDanStr = req.getParameter("minDan");
 		String maxDanStr = req.getParameter("maxDan");
@@ -71,7 +71,7 @@ public class GugudanServlet extends HttpServlet {
 		throws IOException, ServletException
 	{	
 		
-	}
+	}*/
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -122,6 +122,6 @@ public class GugudanServlet extends HttpServlet {
 		
 		PrintWriter out = resp.getWriter();
 		out.println(html.toString());
-		out.close();
+//		out.close();
 	}
 }

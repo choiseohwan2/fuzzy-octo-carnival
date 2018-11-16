@@ -8,16 +8,22 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import kr.or.ddit.utils.CookieUtil;
+
 
 public class ImagesFormServlet extends HttpServlet {
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/html;charset=UTF-8");
 		ServletContext context = req.getServletContext();
 		File folder = (File)context.getAttribute("contentFolder");
@@ -32,35 +38,46 @@ public class ImagesFormServlet extends HttpServlet {
 		
 		
 		
-		//action 속성의 값은 context/imageService, method ="get"
-		InputStream img = this.getClass().getResourceAsStream("NewFile.html");
-		InputStreamReader isr = new InputStreamReader(img,"UTF-8"); //InputStreamReader는 바이트스트림을 캐릭터스트림으로 바꿈
-		BufferedReader br = new BufferedReader(isr);
-		StringBuffer html = new StringBuffer();
-		String temp = null;
-		while((temp = br.readLine()) != null){	//readLine은 한번에 통으로 읽어 올 수 있음.
-			html.append(temp+"\n");
 		
-		}
+		
 		StringBuffer sb = new StringBuffer();
 		
 		String pattern = "<option>%s</option>";
 		for(int i = 0; i <filenames.length;  i++){
 			sb.append(String.format(pattern, filenames[i]));
-			
-		
 		}
 		
-		int start = html.indexOf("@imageService");
-		int end = start + "@imageService".length();
-		String replace = sb.toString();
 		
-		html.replace(start, end, replace);//치환할문자
+//		int start = html.indexOf("@imageService");
+//		int end = start + "@imageService".length();
+//		String replace = sb.toString();
+//		html.replace(start, end, replace);//치환할문자
 		
+		req.setAttribute("optionsAttr", sb.toString());
 		
-		PrintWriter out = resp.getWriter();
-		out.println(html.toString());
-		out.close();
+		// JSON 형태 기록.
+		String imgCookieValue = new CookieUtil(req).getCookieValue("imageCookie");
+		StringBuffer imgTags = new StringBuffer();
+		if(imgCookieValue!=null) {
+			// unmarshalling
+			ObjectMapper mapper = new ObjectMapper();
+			String[] imgNames = mapper.readValue(imgCookieValue, String[].class);
+			String imgPattern = "<img src='imageService.do?selname=%s'/>";
+			for(String imgName : imgNames) {
+				imgTags.append(String.format(imgPattern, imgName));
+			}
+		}
+		req.setAttribute("imgTags", imgTags);
+//		start = html.indexOf("@images");
+//		end = start + "@images".length();
+//		html.replace(start, end, imgTags.toString());//치환할문자
+		String view = "/WEB-INF/views/imageView.jsp";
+		RequestDispatcher rd = req.getRequestDispatcher(view);
+		rd.include(req, resp);
+		
+//		PrintWriter out = resp.getWriter();
+//		out.println(html.toString());
+//		out.close();
 		
 		
 		

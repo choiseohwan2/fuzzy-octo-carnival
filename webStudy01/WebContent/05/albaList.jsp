@@ -25,22 +25,22 @@
       
       <% //맵에 사이즈만큼 ENTRY KEY꺼내오기
       
-      Map<String,AlbasengVO> alba = SimpleFormProcessServlet.albasengs;
+//       Map<String,AlbasengVO> alba = SimpleFormProcessServlet.albasengs;
       
-      for (Entry<String, AlbasengVO> entry : parameterMap.entrySet()) {
+//       for (Entry<String, AlbasengVO> entry : parameterMap.entrySet()) {
       %>
-         <tr>
+<!--          <tr> -->
+<%--       <% --%>
+//          String name = entry.getKey();
+//          AlbasengVO value = entry.getValue();
+//          out.print("<td>"+name+"</td>");
+//          out.print("<td>"+value.getName()+"</td>");
+//          out.print("<td>"+value.getAddress()+"</td>");
+//          out.print("<td>"+value.getTel()+"</td>");
+<%--       %> --%>
+<!--       </tr> -->
       <%
-         String name = entry.getKey();
-         AlbasengVO value = entry.getValue();
-         out.print("<td>"+name+"</td>");
-         out.print("<td>"+value.getName()+"</td>");
-         out.print("<td>"+value.getAddress()+"</td>");
-         out.print("<td>"+value.getTel()+"</td>");
-      %>
-      </tr>
-      <%
-      }
+//       }
       %>
    </tbody>
 </table>

@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java"%>
 <script type="text/javascript">
 	$(function(){
 		var imgArea = $("#imgArea");
@@ -13,12 +14,12 @@
 
 <form name ="imgForm" action="imageService.do" method="get">
 	<select name ="selname">
-		@imageService
+		<%=request.getAttribute("optionsAttr") %>
 	</select>
 	<!-- <input type ="submit" value ="전송"/> -->
 </form>
 <div id="imgArea">
-	@images
+	<%=request.getAttribute("imgTags") %>
 </div>
 <!-- <script type ="text/javascript">
 		var imgArea = document.getElementById("imgArea");

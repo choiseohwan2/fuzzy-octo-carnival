@@ -8,18 +8,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%
-Map<String, String> gradeMap =(Map<String,String>) application.getAttribute("gradeMap");
-Map<String, String> licenseMap =(Map<String,String>) application.getAttribute("licenseMap");
-AlbasengVO albaVO = (AlbasengVO)request.getAttribute("albaVO");
-Map<String,String> errors =(Map<String,String>)request.getAttribute("errors");
-if(albaVO==null){
-	albaVO = new AlbasengVO();
-}
-if(errors==null){
-	errors=new LinkedHashMap<>();
-}
-%>
+<%--
+// Map<String, String> gradeMap =(Map<String,String>) application.getAttribute("gradeMap");
+// Map<String, String> licenseMap =(Map<String,String>) application.getAttribute("licenseMap");
+// AlbasengVO albaVO = (AlbasengVO)request.getAttribute("albaVO");
+// Map<String,String> errors =(Map<String,String>)request.getAttribute("errors");
+// if(albaVO==null){
+// 	albaVO = new AlbasengVO();
+// }
+// if(errors==null){
+// 	errors=new LinkedHashMap<>();
+// }
+--%>
+<jsp:useBean id="gradeMap" class="java.util.HashMap" scope="application"/>
+<jsp:useBean id="licenseMap" class="java.util.LinkedHashMap" scope="application"/>
+<jsp:useBean id="albaVO" class="kr.or.ddit.vo.AlbasengVO" scope="request"/>
+<jsp:useBean id="errors" class="java.util.LinkedHashMap" scope="request"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -102,7 +106,8 @@ if(errors==null){
 				<option value="">학력</option>
 				<%
 					String pattern = "<option value='%s' %s> %s </option>";
-					for(Entry<String,String> entry : gradeMap.entrySet()){
+					for(Object obj : gradeMap.entrySet()){
+						Entry entry =(Entry)obj;
 						String selected = "";
 						if(entry.getKey().equals(albaVO.getGrade())){
 							selected = "selected";
@@ -131,12 +136,13 @@ if(errors==null){
 						if(albaVO.getLicense()!=null){
 							Arrays.sort(albaVO.getLicense());
 						}
-				for(Entry<String,String> entry : licenseMap.entrySet()){
+				for(Object obj : licenseMap.entrySet()){
+					Entry entry2 = (Entry)obj;
 						String selected = "";
-						if(albaVO.getLicense()!=null && Arrays.binarySearch(albaVO.getLicense(), entry.getKey())>-1){
+						if(albaVO.getLicense()!=null && Arrays.binarySearch(albaVO.getLicense(), entry2.getKey())>-1){
 							selected = "selected";
 						}
-						out.println(String.format(pattern,entry.getKey(),selected,entry.getValue()));
+						out.println(String.format(pattern,entry2.getKey(),selected,entry2.getValue()));
 					}
 				%>
 			</select>

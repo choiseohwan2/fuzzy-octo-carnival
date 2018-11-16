@@ -4,11 +4,7 @@
 <%@page import="static java.util.Calendar.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>04/calendar.jsp</title>
+
 <style>
 	.sunday{
 		background-color: red;
@@ -27,7 +23,7 @@
 </style>
 <script type="text/javascript">/*  이전달, 다음달으 클릭했을때, form태그안에 입력했을때 */
 	function eventHandler(year, month) { //이전달이나 다음달을 클릭했을때 받아오는 값을 파라미터로
-		var form = document.forms[0];
+		var form = document.calForm;
 		if((year && month) || month==0){//자바는 year가 boolean타입이어야하지만 자바스크립트는 정해져있지 않다 반드시 값이 넘어올때만 true가 된다
 			form.year.value = year;
 			form.month.value = month;
@@ -36,8 +32,7 @@
 		return false;
 	}
 </script>
-</head>
-<body>
+
 <%
 	request.setCharacterEncoding("UTF-8"); //아래 파라미터에 특수문자가 있을경우 이와같은 코드를 통해 셋팅해준다
 	String yearStr = request.getParameter("year");
@@ -81,7 +76,8 @@
 	//현재 시스템에서 제공하는 모든 locale정보 제공
 	Locale[] locales = Locale.getAvailableLocales();
 %>
-<form><!-- get방식 -->
+<form name="calform" method="post"><!-- get방식 -->
+<input type="hidden" name="command" value="calendar" />
 <h4>
 <%-- <a href="<%=request.getContextPath() %>/04/calendar.jsp?year=<%=beforYear %>&month=<%=beforMonth%>&language=<%=clinetLocale%>">이전달</a> --%>
 <a href="javascript:eventHandler(<%=beforYear%>, <%=beforMonth%>);">이전달</a>
@@ -155,5 +151,3 @@
 %>
 </tbody>
 </table>
-</body>
-</html>

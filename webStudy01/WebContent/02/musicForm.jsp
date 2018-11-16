@@ -9,15 +9,6 @@
 		return application.getMimeType(name).startsWith("text");});
 
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>02/musicForm.jsp</title>
-<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
 <script type="text/javascript">
 	$(function(){
 		var songForm = $("#songForm");
@@ -46,8 +37,6 @@
 		
 	
 </script>
-</head>
-<body>
 <form id="songForm" action="<%=request.getContextPath() %>/song" method="post">
 	<select name="music">
 		<option value="">가사 선택</option>
@@ -61,5 +50,3 @@
 	</select>
 </form>
 <div id="resultArea"></div>
-</body>
-</html>
